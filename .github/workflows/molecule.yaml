@@ -1,0 +1,66 @@
+---
+name: molecule
+
+on:
+  push:
+    branches:
+      - ansible-molecule-2
+
+env:
+  PY_COLORS: true
+  ANSIBLE_FORCE_COLOR: true
+  MOLECULE_DEBUG: false
+  MOLECULE_VERBOSITY: 0
+  MOLECULE_NO_LOG: true
+
+concurrency:
+  group: test
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      max-parallel: 4
+      fail-fast: false
+      matrix:
+        python:
+          - name: Python
+            version: "3.8"
+        ansible:
+          - name: Ansible Core
+            version: "2.13.7"
+        molecule:
+          - name: Molecule
+            version: "4.0.4"
+        molecule-docker:
+          - name: Molecule Docker
+            version: "2.0.0"
+        platform:
+          - name: ubuntu-18.04
+          - name: ubuntu-20.04
+          - name: centos-7
+          - name: rockylinux-8
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up ${{ matrix.python.name }} ${{ matrix.python.version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python.version }}
+
+      - name: Install ${{ matrix.python.name }} ${{ matrix.python.version }} and ${{ matrix.ansible.name }} ${{ matrix.ansible.version }} dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade ansible-core==${{ matrix.ansible.version }}
+          python3 -m pip install --upgrade molecule==${{ matrix.molecule.version }}
+          python3 -m pip install --upgrade molecule-docker==${{ matrix.molecule-docker.version }}
+          ansible-galaxy collection install --requirements-file requirements.yml
+
+      - name: Test the roles with ${{ matrix.molecule.name }} ${{ matrix.molecule.slug }}
+        run: |
+          molecule test --platform-name ${{ matrix.platform.name }}
+        env:
+          HUBOT_SLACK_TOKEN: ${{ secrets.HUBOT_SLACK_TOKEN }}

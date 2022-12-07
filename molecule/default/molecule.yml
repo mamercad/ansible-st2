@@ -1,0 +1,146 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  -
+    name: ubuntu-18.04
+    groups: [test]
+    pre_build_image: false
+    image: stackstorm/packagingtest:bionic-systemd
+    dockerfile: Dockerfile.ubuntu18.j2
+    privileged: true
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:rw]
+    cgroupns_mode: host
+    username: molecule
+    password: molecule
+    pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdCmmPjsOBWRXc+PKdgDRrsciNjp25zTacyz\
+      8Gdkln2ma046brOYXAphhp/85DKgHtANBBt3cl4+HnpDbmAfyq2qZT7hWzAbMxtq0Sj+yyFyUdreXoe4g\
+      EKyxpV6o8p/R/XzEcawvqX/vFc5EIFmvTdamxZs9DQmOE5AZMzUB18Kerkrb0/arUcZ8iMi9Ng9a18avo\
+      w+7oUFZ6Oub7ISz/dkIRojaKO/2paJZ4p+v7ZLn7Hq8TUeBkgAlx872oh8J8linhIq17zK6x4MGL8qiur\
+      p2hnfe0cuCxwcsYGy+4DfK51+E2vks6FprCIfF5hIdz26euPn67/YpM0F0b5nXF busybee@drone"
+  -
+    name: ubuntu-20.04
+    groups: [test]
+    pre_build_image: false
+    image: stackstorm/packagingtest:focal-systemd
+    dockerfile: Dockerfile.ubuntu20.j2
+    privileged: true
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:rw]
+    cgroupns_mode: host
+    username: molecule
+    password: molecule
+    pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdCmmPjsOBWRXc+PKdgDRrsciNjp25zTacyz\
+      8Gdkln2ma046brOYXAphhp/85DKgHtANBBt3cl4+HnpDbmAfyq2qZT7hWzAbMxtq0Sj+yyFyUdreXoe4g\
+      EKyxpV6o8p/R/XzEcawvqX/vFc5EIFmvTdamxZs9DQmOE5AZMzUB18Kerkrb0/arUcZ8iMi9Ng9a18avo\
+      w+7oUFZ6Oub7ISz/dkIRojaKO/2paJZ4p+v7ZLn7Hq8TUeBkgAlx872oh8J8linhIq17zK6x4MGL8qiur\
+      p2hnfe0cuCxwcsYGy+4DfK51+E2vks6FprCIfF5hIdz26euPn67/YpM0F0b5nXF busybee@drone"
+  -
+    name: centos-7
+    groups: [test]
+    pre_build_image: false
+    image: stackstorm/packagingtest:centos7-systemd
+    privileged: true
+    dockerfile: Dockerfile.centos7.j2
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:rw]
+    cgroupns_mode: host
+    username: molecule
+    password: molecule
+    pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdCmmPjsOBWRXc+PKdgDRrsciNjp25zTacyz\
+      8Gdkln2ma046brOYXAphhp/85DKgHtANBBt3cl4+HnpDbmAfyq2qZT7hWzAbMxtq0Sj+yyFyUdreXoe4g\
+      EKyxpV6o8p/R/XzEcawvqX/vFc5EIFmvTdamxZs9DQmOE5AZMzUB18Kerkrb0/arUcZ8iMi9Ng9a18avo\
+      w+7oUFZ6Oub7ISz/dkIRojaKO/2paJZ4p+v7ZLn7Hq8TUeBkgAlx872oh8J8linhIq17zK6x4MGL8qiur\
+      p2hnfe0cuCxwcsYGy+4DfK51+E2vks6FprCIfF5hIdz26euPn67/YpM0F0b5nXF busybee@drone"
+  -
+    name: rockylinux-8
+    groups: [test]
+    pre_build_image: false
+    image: stackstorm/packagingtest:rockylinux8-systemd
+    privileged: true
+    dockerfile: Dockerfile.rockylinux8.j2
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:rw]
+    cgroupns_mode: host
+    username: molecule
+    password: molecule
+    pubkey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdCmmPjsOBWRXc+PKdgDRrsciNjp25zTacyz\
+      8Gdkln2ma046brOYXAphhp/85DKgHtANBBt3cl4+HnpDbmAfyq2qZT7hWzAbMxtq0Sj+yyFyUdreXoe4g\
+      EKyxpV6o8p/R/XzEcawvqX/vFc5EIFmvTdamxZs9DQmOE5AZMzUB18Kerkrb0/arUcZ8iMi9Ng9a18avo\
+      w+7oUFZ6Oub7ISz/dkIRojaKO/2paJZ4p+v7ZLn7Hq8TUeBkgAlx872oh8J8linhIq17zK6x4MGL8qiur\
+      p2hnfe0cuCxwcsYGy+4DfK51+E2vks6FprCIfF5hIdz26euPn67/YpM0F0b5nXF busybee@drone"
+
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles
+    ST2_REPO: stable
+  playbooks:
+    converge: ../../stackstorm.yml
+  inventory:
+    group_vars:
+      test:
+        ansible_user: molecule
+        st2_auth_username: testu
+        st2_auth_password: testp
+        st2chatops_hubot_adapter: slack
+        st2chatops_config:
+          HUBOT_SLACK_TOKEN: "{{ lookup('ansible.builtin.env', 'HUBOT_SLACK_TOKEN') }}"
+        st2repo_name: stable
+        st2_rbac_enable: true
+
+verifier:
+  name: ansible
+
+# lint: |
+#   set -e
+#   yamllint .
+#   flake8
+#   ansible-lint
+
+scenario:
+  create_sequence:
+    # - dependency
+    - create
+    # - prepare
+  check_sequence:
+    # - dependency
+    # - cleanup
+    - destroy
+    - create
+    # - prepare
+    - converge
+    - check
+    - destroy
+  converge_sequence:
+    # - dependency
+    - create
+    # - prepare
+    - converge
+  destroy_sequence:
+    # - dependency
+    # - cleanup
+    - destroy
+  test_sequence:
+    # - dependency
+    # - lint
+    # - cleanup
+    - destroy
+    - syntax
+    - create
+    # - prepare
+    - converge
+    - idempotence
+    # - side_effect
+    # - verify
+    # - cleanup
+    - destroy
