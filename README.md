@@ -135,6 +135,31 @@ vagrant up centos7
 vagrant up rockylinux8
 ```
 
+To change any of the default values, add `ansible.extra_vars` to the [Vagrantfile](Vagrantfile).
+
+> Please do not commit and push secrets!
+
+```ruby
+      vm_config.vm.provision :ansible_local do |ansible|
+        ansible.install = true
+        ansible.verbose = true
+        ansible.playbook = "stackstorm.yml"
+        ansible.extra_vars = {
+          st2_auth_username: 'st2admin',
+          st2_auth_password: 'MySup3rS3cr3tP@ssw0rd!'
+        }
+      end
+```
+
+Referencing environment variables is also possible, and likely better:
+
+```ruby
+        ansible.extra_vars = {
+          st2_auth_username: ENV['ST2_AUTH_USERNAME'],
+          st2_auth_password: ENV['ST2_AUTH_PASSWORD']
+        }
+```
+
 ## Other installation methods
 
 You may be interested in other methods to deploy StackStorm:

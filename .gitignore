@@ -1,6 +1,7 @@
 # KitchenCI
 .kitchen/
 .kitchen.local.yml
+build/kitchen/
 
 # Ansible Retry
 *.retry

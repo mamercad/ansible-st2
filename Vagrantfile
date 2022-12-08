@@ -53,6 +53,10 @@ Vagrant.configure(2) do |config|
         ansible.install = true
         ansible.verbose = true
         ansible.playbook = "stackstorm.yml"
+        ansible.extra_vars = {
+          st2_auth_username: ENV['ST2_AUTH_USERNAME'],
+          st2_auth_password: ENV['ST2_AUTH_PASSWORD']
+        }
       end
     end
   end
