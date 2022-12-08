@@ -3,13 +3,13 @@
   hosts: all
   environment: "{{ st2_proxy_env | default({}) }}"
   roles:
-    - StackStorm.mongodb
-    - StackStorm.rabbitmq
-    - StackStorm.redis
-    - StackStorm.st2repo
-    - StackStorm.st2
-    - StackStorm.nginx
-    - StackStorm.st2web
-    - StackStorm.nodejs
-    - StackStorm.st2chatops
-    - StackStorm.st2smoketests
+    - st2_mongodb
+    - st2_rabbitmq
+    - st2_redis
+    - st2_st2repo
+    - st2_st2
+    - st2_nginx
+    - st2_st2web
+    - st2_nodejs
+    - st2_st2chatops
+    - st2_st2smoketests

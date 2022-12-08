@@ -1,0 +1,24 @@
+---
+- name: Converge
+  hosts: all
+
+  vars:
+    test_roles:
+      - st2_epel
+      - st2_mongodb
+      - st2_redis
+      - st2_st2repo
+      # - st2_st2
+      # - st2_nginx
+      # - st2_st2web
+      # - st2_nodejs
+      # - st2_st2chatops
+      # - st2_st2smoketests
+
+  tasks:
+    - name: Include role
+      ansible.builtin.include_role:
+        name: "{{ test_role }}"
+      loop: "{{ test_roles }}"
+      loop_control:
+        loop_var: test_role

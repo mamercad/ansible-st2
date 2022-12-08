@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  description: Install st2web
+  author: humblearner
+  company: StackStorm
+  license: Apache
+  min_ansible_version: "2.13"
+  tags: st2web
+  platforms:
+    - name: Ubuntu
+      versions: ["bionic", "focal"]
+    - name: EL
+      versions: ["7", "8"]
+  galaxy_tags:
+    - system
+  role_name: st2_st2web
+dependencies:
+  - role: st2_nginx
+  - role: st2_st2repo
+  - role: st2_st2

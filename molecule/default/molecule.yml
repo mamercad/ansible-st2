@@ -1,0 +1,103 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  -
+    name: ubuntu-18.04
+    pre_build_image: true
+    image: stackstorm/packagingtest:bionic-systemd
+    privileged: true
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:ro]
+  -
+    name: ubuntu-20.04
+    pre_build_image: true
+    image: stackstorm/packagingtest:focal-systemd
+    privileged: true
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:ro]
+  -
+    name: centos-7
+    pre_build_image: false
+    image: stackstorm/packagingtest:centos7-systemd
+    privileged: true
+    dockerfile: Dockerfile.centos7
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:ro]
+  -
+    name: rockylinux-8
+    pre_build_image: false
+    image: stackstorm/packagingtest:rockylinux8-systemd
+    privileged: true
+    dockerfile: Dockerfile.rockylinux8
+    command: /sbin/init
+    tmpfs: [/run, /tmp]
+    volumes: [/sys/fs/cgroup:/sys/fs/cgroup:ro]
+
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles
+    ST2_REPO: stable
+    HUBOT_SLACK_TOKEN: xoxb-hunter2
+  inventory:
+    vars:
+      st2repo_name: stable
+      st2chatops_hubot_adapter: slack
+      st2chatops_config:
+        HUBOT_SLACK_TOKEN: xoxb-hunter2
+      st2_rbac_enable: true
+
+verifier:
+  name: ansible
+
+# lint: |
+#   set -e
+#   yamllint .
+#   flake8
+#   ansible-lint
+
+scenario:
+  create_sequence:
+    # - dependency
+    - create
+    # - prepare
+  check_sequence:
+    # - dependency
+    - cleanup
+    - destroy
+    - create
+    # - prepare
+    - converge
+    - check
+    - destroy
+  converge_sequence:
+    # - dependency
+    - create
+    # - prepare
+    - converge
+  destroy_sequence:
+    # - dependency
+    - cleanup
+    - destroy
+  test_sequence:
+    # - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    # - prepare
+    - converge
+    - idempotence
+    # - side_effect
+    - verify
+    - cleanup
+    - destroy
