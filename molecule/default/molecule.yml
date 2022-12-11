@@ -79,7 +79,7 @@ scenario:
     # - prepare
   check_sequence:
     # - dependency
-    - cleanup
+    # - cleanup
     - destroy
     - create
     # - prepare
@@ -93,12 +93,12 @@ scenario:
     - converge
   destroy_sequence:
     # - dependency
-    - cleanup
+    # - cleanup
     - destroy
   test_sequence:
     # - dependency
     - lint
-    - cleanup
+    # - cleanup
     - destroy
     - syntax
     - create
@@ -107,5 +107,5 @@ scenario:
     - idempotence
     # - side_effect
     - verify
-    - cleanup
+    # - cleanup
     - destroy
