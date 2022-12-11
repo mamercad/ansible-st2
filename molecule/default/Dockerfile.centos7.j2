@@ -7,7 +7,7 @@ FROM {{ item.image }}
 {% if item.env is defined %}
 {%   for key, val in item.env.items() %}
 {%     if val %}
-ENV {{ key }}={{ val }}
+ENV {{ key }}="{{ val }}"
 {%     endif %}
 {%   endfor %}
 {% endif %}
