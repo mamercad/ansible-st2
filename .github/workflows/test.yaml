@@ -52,4 +52,4 @@ jobs:
 
       - name: Test the roles with ${{ matrix.molecule.name }} ${{ matrix.molecule.slug }}
         run: |
-          molecule test
+          molecule --debug --verbose test
