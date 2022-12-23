@@ -1,5 +1,6 @@
 ---
 
+st2_rbac_enable: true
 # Username used by StackStorm standalone authentication
 st2_auth_username: testu
 # Password used by StackStorm standalone authentication
