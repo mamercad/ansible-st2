@@ -33,6 +33,11 @@ jobs:
         molecule:
           - name: Molecule
             version: "4.0.4"
+        platform:
+          - name: ubuntu-18.04
+          - name: ubuntu-20.04
+          - name: centos-7
+          - name: rockylinux-8
 
     steps:
       - name: Checkout the repository
@@ -52,4 +57,4 @@ jobs:
 
       - name: Test the roles with ${{ matrix.molecule.name }} ${{ matrix.molecule.slug }}
         run: |
-          molecule --debug --verbose test
+          molecule test --platform-name ${{ matrix.platform.name }}
