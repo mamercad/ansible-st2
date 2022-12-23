@@ -1,12 +1,6 @@
 ---
 
-st2_rbac_enable: true
-# Username used by StackStorm standalone authentication
-st2_auth_username: testu
-# Password used by StackStorm standalone authentication
-st2_auth_password: testp
-
-smoke_tests_rbac_user: smoke_tests_rbac_user
+moke_tests_rbac_user: smoke_tests_rbac_user
 smoke_tests_rbac_password: holyjolly
 
 smoke_tests_rbac:
