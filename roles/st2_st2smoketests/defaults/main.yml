@@ -1,6 +1,6 @@
 ---
 
-moke_tests_rbac_user: smoke_tests_rbac_user
+smoke_tests_rbac_user: smoke_tests_rbac_user
 smoke_tests_rbac_password: holyjolly
 
 smoke_tests_rbac:
