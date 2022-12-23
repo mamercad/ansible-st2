@@ -26,8 +26,9 @@ platforms:
     cgroupns_mode: host
   -
     name: centos-7
-    pre_build_image: false
-    # image: stackstorm/packagingtest:centos7-systemd
+    # pre_build_image: false
+    pre_build_image: true
+    image: stackstorm/packagingtest:centos7-systemd
     privileged: true
     dockerfile: Dockerfile.centos7
     command: /sbin/init
@@ -36,8 +37,9 @@ platforms:
     cgroupns_mode: host
   -
     name: rockylinux-8
-    pre_build_image: false
-    # image: stackstorm/packagingtest:rockylinux8-systemd
+    # pre_build_image: false
+    pre_build_image: true
+    image: stackstorm/packagingtest:rockylinux8-systemd
     privileged: true
     dockerfile: Dockerfile.rockylinux8
     command: /sbin/init

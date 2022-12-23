@@ -14,7 +14,7 @@
       - st2_st2web
       - st2_nodejs
       - st2_st2chatops
-      # - st2_st2smoketests
+      - st2_st2smoketests
 
   tasks:
     - name: Include role
