@@ -8,6 +8,7 @@ driver:
 platforms:
   -
     name: ubuntu-18.04
+    groups: [test]
     pre_build_image: true
     image: stackstorm/packagingtest:bionic-systemd
     privileged: true
@@ -17,6 +18,7 @@ platforms:
     cgroupns_mode: host
   -
     name: ubuntu-20.04
+    groups: [test]
     pre_build_image: true
     image: stackstorm/packagingtest:focal-systemd
     privileged: true
@@ -26,6 +28,7 @@ platforms:
     cgroupns_mode: host
   -
     name: centos-7
+    groups: [test]
     # pre_build_image: false
     pre_build_image: true
     image: stackstorm/packagingtest:centos7-systemd
@@ -37,6 +40,7 @@ platforms:
     cgroupns_mode: host
   -
     name: rockylinux-8
+    groups: [test]
     # pre_build_image: false
     pre_build_image: true
     image: stackstorm/packagingtest:rockylinux8-systemd
@@ -54,8 +58,8 @@ provisioner:
     ST2_REPO: stable
     HUBOT_SLACK_TOKEN: xoxb-hunter2
   inventory:
-    all:
-      vars:
+    group_vars:
+      test:
         st2_auth_username: testu
         st2_auth_password: testp
         st2repo_name: stable
