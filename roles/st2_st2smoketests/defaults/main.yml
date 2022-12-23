@@ -1,5 +1,10 @@
 ---
 
+# Username used by StackStorm standalone authentication
+st2_auth_username: testu
+# Password used by StackStorm standalone authentication
+st2_auth_password: testp
+
 smoke_tests_rbac_user: smoke_tests_rbac_user
 smoke_tests_rbac_password: holyjolly
 
