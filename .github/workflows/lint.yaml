@@ -35,6 +35,8 @@ jobs:
       - name: Install Python dependencies
         run: |
           python3 -m pip install --upgrade pip
+          # https://github.com/ansible/ansible-lint/issues/1795
+          python3 -m pip install 'rich>=10.0.0,<11.0.0'
           python3 -m pip install --upgrade ansible==${{ matrix.ansible }}
           python3 -m pip install --upgrade ansible-lint==${{ matrix.ansible-lint }}
           ansible --version
