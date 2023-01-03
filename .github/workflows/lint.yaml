@@ -6,6 +6,7 @@ on:
     branches:
       # only on merges to master branch
       - master
+      - ansible-lint-2
     tags:
       - v*
   pull_request:
@@ -15,10 +16,24 @@ jobs:
   ansible-lint:
     name: ansible-lint
     runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible-core:
+          - "2.10.3"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Does yaml linting as well
-      - name: Run ansible-lint
-        uses: ansible-community/ansible-lint-action@v6
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade ansible-core==${{ matrix.ansible-core }}
+          python3 -m pip install --upgrade ansible-lint
+          ansible --version
+          ansible-lint --version
