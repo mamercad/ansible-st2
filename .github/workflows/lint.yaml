@@ -21,6 +21,8 @@ jobs:
       matrix:
         ansible:
           - "2.10.3"
+        ansible-lint:
+          - "4.3.7"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -34,6 +36,6 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade ansible==${{ matrix.ansible }}
-          # python3 -m pip install --upgrade ansible-lint
+          python3 -m pip install --upgrade ansible-lint==${{ matrix.ansible-lint }}
           ansible --version
           ansible-lint --version
