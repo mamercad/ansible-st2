@@ -41,3 +41,7 @@ jobs:
           python3 -m pip install --upgrade ansible-lint==${{ matrix.ansible-lint }}
           ansible --version
           ansible-lint --version
+
+      - name: Run ansible-lint
+        run: |
+          ansible-lint
