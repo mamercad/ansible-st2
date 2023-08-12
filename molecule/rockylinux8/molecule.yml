@@ -52,7 +52,7 @@ scenario:
   check_sequence:
     # - dependency
     # - cleanup
-    - destroy
+    # - destroy
     - create
     # - prepare
     - converge
@@ -71,7 +71,7 @@ scenario:
     # - dependency
     # - lint
     # - cleanup
-    - destroy
+    # - destroy
     - syntax
     - create
     # - prepare

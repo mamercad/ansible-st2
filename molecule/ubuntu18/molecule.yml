@@ -10,8 +10,8 @@ platforms:
     groups: [test]
     pre_build_image: false
     image: stackstorm/packagingtest:bionic-systemd
-    dockerfile: Dockerfile.ubuntu18.j2
     privileged: true
+    dockerfile: Dockerfile.ubuntu18.j2
     command: /sbin/init
     tmpfs: [/run, /tmp]
     volumes: [/sys/fs/cgroup:/sys/fs/cgroup:rw]
@@ -52,7 +52,7 @@ scenario:
   check_sequence:
     # - dependency
     # - cleanup
-    - destroy
+    # - destroy
     - create
     # - prepare
     - converge
@@ -71,7 +71,7 @@ scenario:
     # - dependency
     # - lint
     # - cleanup
-    - destroy
+    # - destroy
     - syntax
     - create
     # - prepare

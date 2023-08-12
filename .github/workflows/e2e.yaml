@@ -23,7 +23,7 @@ on:
   push:
     branches:
       - master
-      - ansible-molecule-4
+      - fix-e2e-tests
   schedule:
     - cron: "0 1 * * *"
   workflow_dispatch:
@@ -31,11 +31,11 @@ on:
 env:
   PY_COLORS: true
   ANSIBLE_FORCE_COLOR: true
-  MOLECULE_DEBUG: false
-  MOLECULE_VERBOSITY: 0
-  MOLECULE_NO_LOG: true
-  MOLECULE_VERSION: "3.6.1"
-  MOLECULE_DOCKER_VERSION: "1.1.0"
+  MOLECULE_DEBUG: true
+  MOLECULE_VERBOSITY: 1
+  MOLECULE_NO_LOG: false
+  MOLECULE_VERSION: "5.1.0"
+  MOLECULE_DOCKER_VERSION: "2.1.0"
 
 concurrency:
   group: e2e
@@ -45,7 +45,7 @@ jobs:
   molecule:
     runs-on: ubuntu-20.04
     strategy:
-      max-parallel: 2
+      max-parallel: 4
       fail-fast: false
       matrix:
         st2_repo:
