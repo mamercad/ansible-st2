@@ -31,6 +31,7 @@ on:
 env:
   PY_COLORS: true
   ANSIBLE_FORCE_COLOR: true
+  CONTAINER: docker  # Failed to get D-bus
   MOLECULE_DEBUG: true
   MOLECULE_VERBOSITY: 1
   MOLECULE_NO_LOG: false
